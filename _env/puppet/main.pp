@@ -11,6 +11,7 @@ node default{
     include blitz-lamp::python
     include blitz-lamp::ruby
     include blitz-lamp::vim
+    include blitz-lamp::zend
     include blitz-lamp::php5
     include blitz-lamp::git
     include blitz-lamp::mysql5
