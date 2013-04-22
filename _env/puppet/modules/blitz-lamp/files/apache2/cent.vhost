@@ -1,0 +1,55 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName cent
+    DocumentRoot /home/vagrant/www/Centurion/public
+    <Directory /home/vagrant/www/Centurion/public>
+            Options Indexes FollowSymLinks MultiViews
+            EnableSendfile Off
+            AllowOverride All
+            Order allow,deny
+            allow from all
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/cent_error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel error
+
+    php_value memory_limit 9999M
+
+    CustomLog ${APACHE_LOG_DIR}/cent_access.log combined
+
+</VirtualHost>
+
+<VirtualHost *:443>
+    DocumentRoot "/home/vagrant/www/Centurion/public"
+    ServerName cent:443
+    ServerAdmin webmaster@localhost
+    EnableSendfile Off
+    ErrorLog "${APACHE_LOG_DIR}/cent_ssl_error.log"
+    TransferLog "${APACHE_LOG_DIR}/cent_ssl_transfer_access.log"
+
+    SSLEngine on
+    SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
+
+    SSLCertificateFile    "/home/vagrant/cent.crt"
+    SSLCertificateKeyFile "/home/vagrant/cent.key"
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+
+    <Directory "/home/vagrant/www/Centurion/public">
+        Options FollowSymLinks
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    BrowserMatch ".*MSIE.*" \
+             nokeepalive ssl-unclean-shutdown \
+             downgrade-1.0 force-response-1.0
+
+</VirtualHost>
+
