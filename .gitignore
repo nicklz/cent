@@ -3,3 +3,5 @@ tmp
 .DS_Store
 _env/.vagrant
 *.py
+Centurion/public/index.php
+Centurion/public/status/*
