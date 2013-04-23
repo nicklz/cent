@@ -19,8 +19,8 @@ from fabric.api import settings
 @task
 def setup():
     with settings(warn_only=True):
-        # Create directories
+        # Install a local Centurion
         local('echo "create database centurion;" | mysql -uroot')
         local('/home/vagrant/www/Centurion/bin/zf.sh check install')
         local('/home/vagrant/www/Centurion/bin/zf.sh db install local')
-
+        local('sudo apache2ctl restart')
