@@ -1,0 +1,13 @@
+<ul>
+    <?php
+    foreach ($this->postRowset as $postRow) :
+    ?>
+        <li>
+            <h2><a href="<?php echo $postRow->permalink?>"><?php echo $postRow->title?></a></h2>
+            <?php echo $postRow->body;?>
+ 
+        </li>
+    <?php 
+    endforeach;
+    ?>
+</ul>
